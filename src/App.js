@@ -9,8 +9,16 @@ function App() {
   const clickHandler = (event) => {
     setResult(result.concat(event.target.value));
   };
-  const handleClick = (value) => {
-    setInput(input + value);
+ const handleButtonClick = (value) => {
+    if(value=== 'AC'){
+      setInput(' ');
+    }
+    else if(value ==='DE'){
+      setInput(input.slice(0,-1));
+    }
+    else{
+      setInput(input + value);
+    }
   };
   const handleClear = () => {
     setInput('');
@@ -19,14 +27,9 @@ function App() {
   const handleFunctionClick = (func) => {
     setInput(func + '(');
   };
-  const clearDisplay = () => {
-    setResult("");
-  };
+
   const calculate = () => {
     setResult(eval(result).toString());
-  };
-  const slice = () => {
-    setResult(result.slice(0, -1));
   };
   const handleCalculate = () => {
     try {
@@ -60,10 +63,14 @@ function App() {
         {result !== '' ? result : input}
       </div>
         <div className="buttons">
+        <button onClick={() => handleButtonClick('AC')}>AC</button> 
+        <button onClick={() => handleButtonClick('DE')}>DE</button>
+        <button onClick={() => handleClick('%')}>%</button>
+        <button onClick={() => handleClick('/')}>/</button>
         <button onClick={() => handleClick('7')}>7</button>
         <button onClick={() => handleClick('8')}>8</button>
         <button onClick={() => handleClick('9')}>9</button>
-        <button onClick={() => handleClick('+')}>+</button>
+        <button onClick={() => handleClick('*')}>*</button>
         <button onClick={() => handleClick('4')}>4</button>
         <button onClick={() => handleClick('5')}>5</button>
         <button onClick={() => handleClick('6')}>6</button>
@@ -71,10 +78,10 @@ function App() {
         <button onClick={() => handleClick('1')}>1</button>
         <button onClick={() => handleClick('2')}>2</button>
         <button onClick={() => handleClick('3')}>3</button>
-        <button onClick={() => handleClick('*')}>*</button>
+        <button onClick={() => handleClick('+')}>+</button>
         <button onClick={() => handleClick('0')}>0</button>
+        <button onClick={() => handleClick('.')}>.</button>
         <button onClick={handleCalculate}>=</button>
-        <button onClick={() => handleClick('/')}>/</button>
         <button onClick={handleClear}>Clear</button>
         </div>
       </div>
