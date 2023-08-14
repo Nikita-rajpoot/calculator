@@ -1,141 +1,84 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
 import "./App.css";
 
 function App() {
-  const[result,setResult]=useState("");
+  const [input, setInput] = useState('');
+  const [result, setResult] = useState('');
+  const [history, setHistory] = useState([]);
 
-  const clickHandler=(event)=>{
-    setResult(result.concat(event.target.value))
-  }
-
-  const clearDisplay=()=>{
-      setResult("");
-
-  }
-  const calculate=()=>{
+  const clickHandler = (event) => {
+    setResult(result.concat(event.target.value));
+  };
+  const handleClick = (value) => {
+    setInput(input + value);
+  };
+  const handleClear = () => {
+    setInput('');
+    setResult('');
+  };
+  const handleFunctionClick = (func) => {
+    setInput(func + '(');
+  };
+  const clearDisplay = () => {
+    setResult("");
+  };
+  const calculate = () => {
     setResult(eval(result).toString());
-  }
-   const slice = () => {
-    setResult(result.slice(0,-1))
-  }
+  };
+  const slice = () => {
+    setResult(result.slice(0, -1));
+  };
+  const handleCalculate = () => {
+    try {
+      const calculatedResult = eval(input).toString();
+      setResult(calculatedResult);
+      setHistory([...history, { input, result: calculatedResult }]);
+    } catch (error) {
+      setResult('Error');
+    }
+  };
+
+  const clearHistory = () => {
+    setHistory([]);
+  };
+
   return (
-    <div className="Calc">
-      <input type="text" placeholder="0" id="answer" value={result}/>
-    <div>
-     <input
-      type="button"
-      value="AC"
-      className="button"
-      onClick={clearDisplay}
-      />
-      <input
-      type="button"
-      value="DE"
-      className="button"
-      onClick={slice}
-      />
-      <input
-      type="button"
-      value="%"
-      className="button"
-      onClick={clickHandler}
-      />
-      <input
-      type="button"
-      value="/"
-      className="button"
-      onClick={clickHandler}
-      />
+    <div className="container">
+      <div className="Calc" id="calculator">
+      <div className="history">
+        <h2>History</h2>
+        <ul>
+          {history.map((item, index) => (
+            <li key={index}>
+              {item.input} = {item.result}
+            </li>
+          ))}
+        </ul>
+        <button onClick={clearHistory}>Clear History</button>
+      </div>
+      <div className="display">
+        {result !== '' ? result : input}
+      </div>
+        <div className="buttons">
+        <button onClick={() => handleClick('7')}>7</button>
+        <button onClick={() => handleClick('8')}>8</button>
+        <button onClick={() => handleClick('9')}>9</button>
+        <button onClick={() => handleClick('+')}>+</button>
+        <button onClick={() => handleClick('4')}>4</button>
+        <button onClick={() => handleClick('5')}>5</button>
+        <button onClick={() => handleClick('6')}>6</button>
+        <button onClick={() => handleClick('-')}>-</button>
+        <button onClick={() => handleClick('1')}>1</button>
+        <button onClick={() => handleClick('2')}>2</button>
+        <button onClick={() => handleClick('3')}>3</button>
+        <button onClick={() => handleClick('*')}>*</button>
+        <button onClick={() => handleClick('0')}>0</button>
+        <button onClick={handleCalculate}>=</button>
+        <button onClick={() => handleClick('/')}>/</button>
+        <button onClick={handleClear}>Clear</button>
+        </div>
+      </div>
     </div>
-    <div>
-      <input 
-       type="button" 
-       value="7" 
-       className="button" 
-       onClick={clickHandler}/>
-      <input
-       type="button"
-       value="8" 
-       className="button"
-       onClick={clickHandler}/>
-      <input 
-       type="button" 
-       value="9" 
-       className="button" 
-       onClick={clickHandler}/>
-      <input 
-       type="button" 
-       value="*" 
-       className="button" 
-       onClick={clickHandler}/>
-    </div>
-    <div>
-      <input 
-       type="button" 
-       value="4" 
-       className="button" 
-       onClick={clickHandler}/>
-      <input 
-       type="button" 
-       value="5" 
-       className="button" 
-       onClick={clickHandler}/>
-      <input 
-       type="button" 
-       value="6" 
-       className="button" 
-       onClick={clickHandler}/>
-      <input 
-       type="button" 
-       value="-" 
-       className="button" 
-       onClick={clickHandler}
-       />
-    </div>
-    <div>
-      <input
-       type="button" 
-       value="1" 
-       className="button" 
-       onClick={clickHandler}
-       />
-      <input 
-       type="button" 
-       value="2" 
-       className="button" 
-       onClick={clickHandler}
-       />
-      <input 
-       type="button" 
-       value="3" 
-       className="button" 
-       onClick={clickHandler}
-        />
-      <input 
-       type="button"
-       value="+"
-       className="button"
-       onClick={clickHandler}
-       />
-    </div>
-    <div>
-      <input
-       type="button"
-       value="0"
-       className="button"
-       onClick={clickHandler}/>
-      <input 
-       type="button"
-       value="." 
-       className="button" 
-       onClick={clickHandler}/>
-      <input 
-       type="button" 
-       value="=" 
-       className="button button1" 
-       onClick={calculate}/>
-   </div>
-</div>
   );
 }
 
