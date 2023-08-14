@@ -1,25 +1,56 @@
-.Calc{
-  width: 320px;
-  margin: 100px auto;
+/* ...existing styles */
+
+.history {
+  margin-top: 20px;
+  text-align: center;
 }
-#answer{
-  background-color:aquamarine;
+
+.history h2 {
+  font-size: 1.5rem;
+  margin-bottom: 5px;
+}
+
+.history ul {
+  list-style: none;
+  padding: 0;
+}
+
+.history li {
+  font-size: 1.2rem;
+  margin-bottom: 5px;
+}
+.calculator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.display {
+  font-size: 2rem;
   padding: 10px;
-  font-size: 40px;
-  width:295px;
-  height: 30px;
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+  width: 300px;
   text-align: right;
-  border: 3px solid;
 }
-.button{
-  background-color:#333;
-  height: 80px;
-  width: 80px;
-  color: white;
-  font-size: 30px;
-  border: 1px solid black;
-  float:left;
+
+.buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 5px;
+  max-width: 300px;
 }
-.button1{
-  width:160px;
+
+button {
+  padding: 10px;
+  font-size: 1.2rem;
+  background-color: #f7f1f1;
+  border: 1px solid #ccc;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #ddd;
 }
